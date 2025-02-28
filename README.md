@@ -2,6 +2,15 @@
 
 A Model Context Protocol (MCP) server that provides a comprehensive set of tools for Python development, enabling AI assistants like Claude to effectively work with Python code and projects.
 
+## Overview
+
+MCP Python Toolbox implements a Model Context Protocol server that gives Claude the ability to perform Python development tasks through a standardized interface. It enables Claude to:
+
+- Read, write, and manage files within a workspace
+- Analyze, format, and lint Python code
+- Manage virtual environments and dependencies
+- Execute Python code safely
+
 ## Features
 
 ### File Operations (`FileOperations`)
@@ -66,12 +75,53 @@ pip install -e ".[dev]"
 
 ## Usage
 
-### Starting the Server
+### Running as a CLI Tool
+
+The simplest way to start the server is using the CLI:
+
+```bash
+# Start with current directory as workspace
+python -m mcp_python_toolbox
+
+# Or specify a workspace directory
+python -m mcp_python_toolbox --workspace /path/to/your/project
+```
+
+### Setting Up with Claude Desktop
+
+Claude Desktop can automatically launch and manage the MCP Python Toolbox server. Here's how to configure it:
+
+1. Install and set up the MCP Python Toolbox as described above
+2. Add a configuration entry for the Python Toolbox in Claude Desktop's MCP tools configuration:
+
+```json
+"python-toolbox": {
+  "command": "/Users/username/path/to/mcp_python_toolbox/.venv/bin/python",
+  "args": [
+    "-m",
+    "mcp_python_toolbox",
+    "--workspace",
+    "/Users/username/path/to/workspace"
+  ],
+  "env": {
+    "PYTHONPATH": "/Users/username/path/to/mcp_python_toolbox/src",
+    "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "VIRTUAL_ENV": "/Users/username/path/to/mcp_python_toolbox/.venv",
+    "PYTHONHOME": ""
+  }
+}
+```
+
+3. Customize the paths to match your environment
+4. Claude Desktop will automatically start the MCP server when needed
+5. Claude will now have access to Python development tools through the MCP interface
+
+### Programmatic Usage
 
 ```python
 from mcp_python_toolbox import PythonToolboxServer
 
-server = PythonToolboxServer(workspace_root="path/to/your/project")
+server = PythonToolboxServer(workspace_root="/path/to/your/project")
 server.setup()
 server.run()
 ```
@@ -82,7 +132,7 @@ server.run()
 ```python
 from mcp_python_toolbox.core import FileOperations
 
-file_ops = FileOperations(workspace_root="path/to/project")
+file_ops = FileOperations(workspace_root="/path/to/project")
 
 # Read file contents
 content = file_ops.read_file("src/example.py")
@@ -104,7 +154,7 @@ for item in contents:
 ```python
 from mcp_python_toolbox.core import CodeAnalyzer
 
-analyzer = CodeAnalyzer(workspace_root="path/to/project")
+analyzer = CodeAnalyzer(workspace_root="/path/to/project")
 
 # Analyze Python file structure
 analysis = analyzer.parse_python_file("src/example.py")
@@ -124,7 +174,7 @@ for issue in issues:
 ```python
 from mcp_python_toolbox.core import ProjectManager
 
-pm = ProjectManager(workspace_root="path/to/project")
+pm = ProjectManager(workspace_root="/path/to/project")
 
 # Create virtual environment
 pm.create_virtual_environment()
@@ -149,7 +199,7 @@ pm.update_package("flask", version="2.0.0")  # to specific version
 ```python
 from mcp_python_toolbox.core import CodeExecutor
 
-executor = CodeExecutor(workspace_root="path/to/project")
+executor = CodeExecutor(workspace_root="/path/to/project")
 
 code = '''
 def greet(name):
@@ -184,6 +234,12 @@ mypy src/mcp_python_toolbox
 pylint src/mcp_python_toolbox
 ```
 
+### Formatting
+
+```bash
+black src/mcp_python_toolbox
+```
+
 ## Contributing
 
 1. Fork the repository
@@ -198,6 +254,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-- Inspired by the [Model Context Protocol](https://github.com/modelcontextprotocol/servers) project
+- Implements the [Model Context Protocol](https://github.com/modelcontextprotocol/servers) specification
 - Built with modern Python development tools and best practices
 - Uses industry-standard formatting (Black) and linting (Pylint) tools
