@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp_python_toolbox"
+version = "0.1.0"
+description = "A Model Context Protocol server for Python development tools"
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+authors = [
+    { name = "Gianluca Mazza" }
+]
+dependencies = [
+    "mcp",
+    "httpx",
+    "uvicorn",
+    "black>=23.0.0",
+    "autopep8>=2.0.0",
+    "pylint>=3.0.0",
+    "pytest>=7.0.0",
+    "mypy>=1.0.0",
+    "rope>=1.0.0",
+    "types-setuptools",
+    "toml>=0.10.0",
+    "types-toml"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+    "pylint>=3.0.0"
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py37"]
+
+[tool.mypy]
+python_version = "3.7"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.pylint.messages_control]
+disable = [
+    "C0111",  # missing-docstring
+    "C0103",  # invalid-name
+    "C0330",  # bad-continuation
+    "C0326",  # bad-whitespace
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short" 

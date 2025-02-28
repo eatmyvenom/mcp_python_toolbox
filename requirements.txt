@@ -1,0 +1,12 @@
+git+https://github.com/modelcontextprotocol/python-sdk.git#egg=mcp
+httpx
+uvicorn
+black>=23.0.0
+autopep8>=2.0.0
+pylint>=3.0.0
+pytest>=7.0.0
+mypy>=1.0.0
+rope>=1.0.0
+types-setuptools
+toml>=0.10.0
+types-toml
