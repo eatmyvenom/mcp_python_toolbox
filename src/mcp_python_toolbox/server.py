@@ -27,7 +27,7 @@ class PythonToolboxServer(FastMCP):
         # Code analysis and execution
         #self.add_tool(self.analyze_python_file, name="analyze_python_file", description="Analyze the structure of a Python file")
         #self.add_tool(self.format_code, name="format_code", description="Format Python code according to style guidelines")
-        #self.add_tool(self.lint_code, name="lint_code", description="Run linting on Python code")
+        # self.add_tool(self.lint_code, name="lint_code", description="Run linting on Python code")
         self.add_tool(self.execute_python, name="execute_python", description="Execute Python code")
 
         # Project management
@@ -72,6 +72,6 @@ class PythonToolboxServer(FastMCP):
     async def check_dependency_conflicts(self) -> List[Dict[str, Any]]:
         return self.project_manager.check_dependency_conflicts()
 
-    async def execute_python(self, code: str, working_dir: Optional[str] = None) -> Dict[str, Any]:
+    async def execute_python(self, code: str) -> Dict[str, Any]:
         """Execute Python code and return the result."""
-        return self.code_executor.execute_code(code, working_dir) 
+        return self.code_executor.execute_code(code, None)
