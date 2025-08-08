@@ -19,22 +19,22 @@ class PythonToolboxServer(FastMCP):
     def setup(self) -> None:
         """Register all tools with the server."""
         # File operations
-        self.add_tool(self.read_file, name="read_file", description="Read the contents of a file")
-        self.add_tool(self.write_file, name="write_file", description="Write content to a file")
-        self.add_tool(self.delete_file, name="delete_file", description="Delete a file")
-        self.add_tool(self.list_directory, name="list_directory", description="List contents of a directory")
+        #self.add_tool(self.read_file, name="read_file", description="Read the contents of a file")
+        #self.add_tool(self.write_file, name="write_file", description="Write content to a file")
+        #self.add_tool(self.delete_file, name="delete_file", description="Delete a file")
+        #self.add_tool(self.list_directory, name="list_directory", description="List contents of a directory")
 
         # Code analysis and execution
-        self.add_tool(self.analyze_python_file, name="analyze_python_file", description="Analyze the structure of a Python file")
-        self.add_tool(self.format_code, name="format_code", description="Format Python code according to style guidelines")
-        self.add_tool(self.lint_code, name="lint_code", description="Run linting on Python code")
+        #self.add_tool(self.analyze_python_file, name="analyze_python_file", description="Analyze the structure of a Python file")
+        #self.add_tool(self.format_code, name="format_code", description="Format Python code according to style guidelines")
+        #self.add_tool(self.lint_code, name="lint_code", description="Run linting on Python code")
         self.add_tool(self.execute_python, name="execute_python", description="Execute Python code")
 
         # Project management
-        self.add_tool(self.create_virtual_environment, name="create_venv", description="Create a virtual environment")
-        self.add_tool(self.install_dependencies, name="install_dependencies", description="Install project dependencies")
-        self.add_tool(self.get_installed_packages, name="list_packages", description="List installed packages")
-        self.add_tool(self.check_dependency_conflicts, name="check_conflicts", description="Check for dependency conflicts")
+        #self.add_tool(self.create_virtual_environment, name="create_venv", description="Create a virtual environment")
+        #self.add_tool(self.install_dependencies, name="install_dependencies", description="Install project dependencies")
+        #self.add_tool(self.get_installed_packages, name="list_packages", description="List installed packages")
+        #self.add_tool(self.check_dependency_conflicts, name="check_conflicts", description="Check for dependency conflicts")
 
     # File operations handlers
     async def read_file(self, path: str, start_line: Optional[int] = None, end_line: Optional[int] = None) -> str:
